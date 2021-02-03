@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
+// "@date-io/moment": "^1.3.13" - более поздние версии не подойдут
+import MomentUtils from '@date-io/moment'; 
 import moment from 'moment';
 moment.locale('ru');
 
-import DateFnsUtils from '@date-io/date-fns';
 import {
   MuiPickersUtilsProvider,
   DatePicker
 } from '@material-ui/pickers';
-import ruLocale from "date-fns/locale/ru";
 import { Typography } from '@material-ui/core';
+
 
 const DateInput = styled(DatePicker)`
   width: 0;
@@ -32,7 +33,7 @@ const PickableDate = ({ value, onChange, format = 'DD.MM.YYYY', dayEnd = false }
       <DocsDate display="inline" onClick={() => setIsOpen(true)}>
         {moment(value).format(format)}
       </DocsDate>
-      <MuiPickersUtilsProvider utils={DateFnsUtils} locale={ruLocale}>
+      <MuiPickersUtilsProvider utils={MomentUtils} libInstance={moment} locale="ru">
         <DateInput
           onOpen={() => setIsOpen(true)}
           onClose={() => setIsOpen(false)}
